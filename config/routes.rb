@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'chats/index'
+  get 'chats/show'
   get 'search/search'
   get 'relationships/create'
   get 'relationships/destroy'
@@ -25,5 +27,7 @@ Rails.application.routes.draw do
     get :followers, on: :member
     
   end
+  
+  resources :chats
 
 end

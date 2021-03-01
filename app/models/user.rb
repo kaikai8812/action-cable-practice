@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+  has_many :chats,dependent: :destroy
   
   # ↓フォロー関係記述
   # 自分が、フォローしているユーザー関連

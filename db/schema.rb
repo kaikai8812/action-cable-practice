@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_02_062209) do
+ActiveRecord::Schema.define(version: 2021_03_01_113032) do
 
   create_table "book_comments", force: :cascade do |t|
     t.text "comment"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 2021_02_02_062209) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.integer "users_id", null: false
+    t.integer "partner_id", null: false
+    t.string "sentence", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["users_id"], name: "index_chats_on_users_id"
   end
 
   create_table "favorites", force: :cascade do |t|
