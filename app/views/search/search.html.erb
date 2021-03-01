@@ -1,0 +1,78 @@
+<h1>検索結果</h1>
+<h3>検索ワード:<%= @value %>, 検索方法:<%= @method %>, 検索対象:<%= @model %> </h3>
+
+<% if @model == "user" %>
+    <h2>Users</h2>
+    <table class="table table-striped table-hover ">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>name</th>
+          <th>フォロー数</th>
+          <th>フォロワー数</th>
+          <th>フォロー</th>
+          <th colspan="1"></th>
+          <!--colspanは、showまで横線を伸ばすために使用-->
+        </tr>
+      </thead>
+      
+    <tbody>
+  <% @datas.each do |user| %>
+        <tr>
+          <td><%= attachment_image_tag user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %></td>
+          <td><%= user.name %></td>
+          <td><%= user.followings.count %></td>
+          <td><%= user.followeds.count %></td>
+          <td>
+            <% if current_user != user %>
+              <% if user.followed_by?(current_user) %>
+                <p><%= link_to "フォロー済み", user_relationships_path(user), method: :delete %></p>
+              <% else %>
+                <p><%= link_to "フォローする", user_relationships_path(user), method: :post %></p>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= link_to "Show", user_path(user) %></td>
+        </tr>
+  <% end %>
+    </tbody>
+    </table>
+<% elsif @model == "book" %>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th>opnion</th>
+                <th>いいね</th>
+                <th>コメント</th>
+              </tr>
+            </thead>
+            
+          <tbody>
+        <% @datas.each do |book| %>
+              <tr>
+                  <td>
+                     <%= link_to user_path(book.user) do %>
+                      <%= attachment_image_tag book.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %>
+                    <% end %>
+                  </td>   
+                  <td>
+                    <%= link_to book_path(book) do %>
+                      <%= book.title%>
+                    <% end %> 
+                  </td>
+                
+                  <td><%= book.body %></td>
+                <td>
+                  <%= render 'favorites/favorites', user: current_user, book: book %>
+                </td>
+                <td>
+                  <p>コメント数:<%= book.book_comments.count %></p>
+                </td>
+              </tr>
+        <% end %>
+          </tbody>
+          </table>
+
+<% end %>

@@ -1,0 +1,10 @@
+<% if obj.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <p><%= obj.errors.count %> errors prohibited this book from being saved:</p>
+    <ul>
+      <% obj.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

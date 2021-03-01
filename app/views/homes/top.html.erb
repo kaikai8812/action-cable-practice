@@ -1,0 +1,40 @@
+
+<div class="container"> 
+      <div class="col-6 mx-auto ">
+       <div class="row">
+         <h1>welcome to <i class="fas fa-book"></i>Bookers !!</h1>
+       </div>
+        <div class="row">
+        <p>
+          In <i class="fas fa-book"></i>Bookers,<br>
+          you can share and exchange your opinions , inpressions , and emotions<br>
+          about various books!
+        </p>
+       </div>
+      </div> 
+     <div class="mx-auto col-5">
+        <% if user_signed_in? %>
+          <div class="row mb-3"> 
+           
+              <%= link_to "Log in", user_path(current_user), {class: "Log_in_button btn btn-info btn-block btn-info"} %>
+            
+          </div>
+          <div class="row">  
+            
+              <%= link_to "Sign up", user_path(current_user), {class: "Sign_up_button btn btn-success btn-block"}  %>
+            
+          </div>  
+      <% else %>
+        <div class="row mb-3">
+            
+            <%= link_to "Log in", new_user_session_path, {class: "Log_in_button btn btn-info btn-block"}  %>
+            
+        </div>    
+        <div class="row">    
+            
+            <%= link_to "Sign up", new_user_registration_path, {class: "Sign_up_button btn btn-success btn-block"}  %>
+            
+        </div>    
+      <% end %>
+    </div>  
+  </div>
